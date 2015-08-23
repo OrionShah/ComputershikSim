@@ -1,6 +1,8 @@
 debug = true
 local startTime;
-local locTime = 0;
+local locTimeSeconds = 0;
+local locTimeMinutes = 0;
+local locTimeHours = 0;
 
 require("test")
 
@@ -34,7 +36,17 @@ function love.draw(dt)
     local x, y = love.mouse.getPosition();
     local pos = string.format("x: %d y: %d ", x, y);
 
-    time = string.format("Time from start: %d", TimeNum - startTime);
+    locTimeSeconds = TimeNum - startTime;
+    if (locTimeSeconds > 59) then
+    	locTimeMinutes = locTimeMinutes + 1;
+    	locTimeSeconds = 0;
+    end
+    if (locTimeMinutes > 59) then
+    	locTimeHours = locTimeHours + 1;
+    	locTimeMinutes = 0;
+    end
+
+    time = string.format("Time from start: %d:%d:%d", locTimeHours, locTimeMinutes, locTimeSeconds);
 
 	love.graphics.print(version, startX+5, startY+5);
 	love.graphics.print(os, startX+5, startY+20);
