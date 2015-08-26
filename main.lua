@@ -4,13 +4,16 @@ local locTimeSeconds = 0;
 local locTimeMinutes = 0;
 local locTimeHours = 0;
 
-require("test")
+require("player");
+require("test");
+
 
 local ui = require 'ui'
 
 function love.load(arg)
 	  ui.registerEvents()
 	  startTime = love.timer.getTime();
+	  print(player);
 end
 
 function love.update(dt)
@@ -54,4 +57,5 @@ function love.draw(dt)
 	love.graphics.print(Time, startX+5, startY+50);
 	love.graphics.print(pos, startX+5, startY+65);
 	love.graphics.print(time, startX+5, startY+80);
+	player.print();
 end
